@@ -1,7 +1,7 @@
 {
 	"name": "PWA Calculator",
 	"short_name": "Calculator",
-	"start_url": "/index.html",
+	"start_url": "/Teste_PWA",
 	"display": "standalone",
 	"background_color": "#0D1117",
 	"theme_color": "#010409",
