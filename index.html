@@ -41,25 +41,36 @@
   </div>
   <script src="script.js"></script>
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(function(registration) {
-          console.log('Service Worker registrado com sucesso:', registration);
-          registration.addEventListener('updatefound', () => {
-            const newWorker = registration.installing;
-            newWorker.addEventListener('statechange', () => {
-              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                if (confirm('Nova versão disponível. Deseja atualizar?')) {
-                  window.location.reload();
-                }
-              }
-            });
-          });
-        })
-        .catch(function(error) {
-          console.log('Falha ao registrar o Service Worker:', error);
-        });
+  // Previne o comportamento padrão de toque duplo
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', function (event) {
+    let now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
     }
-  </script>
+    lastTouchEnd = now;
+  }, false);
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(function(registration) {
+        console.log('Service Worker registrado com sucesso:', registration);
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing;
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              if (confirm('Nova versão disponível. Deseja atualizar?')) {
+                window.location.reload();
+              }
+            }
+          });
+        });
+      })
+      .catch(function(error) {
+        console.log('Falha ao registrar o Service Worker:', error);
+      });
+  }
+</script>
+
 </body>
 </html>
