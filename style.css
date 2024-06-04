@@ -20,7 +20,7 @@ body {
   width: 370px;
   height: 80px;
   border: none;
-  background-color: #000000;
+  background-color: #0b65da;
   color: white;
   text-align: right;
   padding-right: 20px;
@@ -59,7 +59,7 @@ button:active {
 
 .equal-sign {
   background-color: #4caf50;
-  grid-column: span 2;
+  grid-column: span 4;
   color: white;
 }
 
