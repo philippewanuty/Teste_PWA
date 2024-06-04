@@ -51,6 +51,10 @@
     lastTouchEnd = now;
   }, false);
 
+   document.addEventListener('touchmove', function (event) {
+      event.preventDefault();
+    }, { passive: false });
+
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js')
       .then(function(registration) {
